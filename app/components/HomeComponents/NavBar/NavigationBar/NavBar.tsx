@@ -1,29 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { useAuth } from "@/app/AuthContext/AuthContext";
-import { useRouter } from "next/navigation";
 
-function NavBar() {
+function NavBar(props: any) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const { state, setState, logout } = useAuth();
-  const router = useRouter();
 
-  useEffect(() => {
-    const fetchData = () => {
-      const loginData: any = sessionStorage.getItem("user");
-      const user = JSON.parse(loginData);
-      console.log(user);
-      if (!user) {
-        console.log("There is no user");
-        router.push("/Login");
-      } else {
-        setState(user);
-      }
-    };
-    fetchData();
-  }, []);
+  const { user, signout } = props;
 
   const toggleProfile = () => {
     setIsProfileOpen((prev) => !prev);
@@ -39,24 +22,9 @@ function NavBar() {
     }
   };
 
-  const signout = () => {
-    logout();
-  };
-
-  if (!state || typeof state !== "object") {
-    // for testing purposes remove after complete and "use Higher Order Component"
-    return <div className="">Loading...</div>;
-  }
-
-  const user = state as {
-    firstName?: string;
-    lastName?: string;
-    email?: string;
-  };
-
   return (
-    <nav className="bg-gray-200 border-gray-200 dark:bg-gray-900 w-full">
-      <div className="w-full flex flex-wrap items-center justify-between mx-auto p-4 dark:bg-gray-900">
+    <nav className="bg-white border-gray-200 dark:bg-gray-900 w-full h-14 sticky top-0 z-50">
+      <div className="w-full h-14 flex flex-wrap items-center justify-between mx-auto pl-3 pr-3 dark:bg-fbDark-post">
         <a
           href="/Home"
           className="flex items-center space-x-3 rtl:space-x-reverse"
@@ -170,7 +138,7 @@ function NavBar() {
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
           id="navbar-user"
         >
-          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-200 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-gray-200 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-white md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-fbDark-post md:dark:bg-fbDark-post dark:border-gray-700">
             {/* Home */}
             <li aria-label="Home">
               <a

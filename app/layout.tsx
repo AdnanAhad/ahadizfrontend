@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className="bg-gray-200 dark:bg-fbDark">
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>

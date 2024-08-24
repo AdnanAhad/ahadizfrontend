@@ -13,8 +13,16 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        fbDark: {
+          DEFAULT: "#18191A", // Primary dark mode background color
+          lighter: "#242526", // Lighter dark mode background color
+          post: "#242526",
+        },
+      },
     },
   },
   plugins: [],
 };
+
 export default config;
